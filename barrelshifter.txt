@@ -1,0 +1,15 @@
+module barrelshifter(s,d0,d1,d2,d3,y0,y1,y2,y3);
+input d0,d1,d2,d3;
+input [1:0]s;
+output y0,y1,y2,y3;
+wire w0,w1,w2,w3;
+assign w0=s[1]?d2:d0;
+assign w1=s[1]?d3:d1;
+assign w2=s[1]?d0:d2;
+assign w3=s[1]?d1:d3;
+
+assign y0=s[0]?w1:w0;
+assign y1=s[0]?w2:w1;
+assign y2=s[0]?w3:w2;
+assign y3=s[0]?w0:w3;
+endmodule
