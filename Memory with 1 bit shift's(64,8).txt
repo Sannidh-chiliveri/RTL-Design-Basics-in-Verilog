@@ -1,0 +1,20 @@
+module shift_mem(clk,addr,bsh_data,ash_data,shr,shl);
+input clk,shr,shl;
+input [2:0]addr;
+output reg [63:0]bsh_data,ash_data;
+reg [63:0] mem [7:0];
+always@(posedge clk)
+begin
+bsh_data<=mem[addr];
+if(shl)
+begin
+ash_data<=bsh_data<<1;
+end
+if(shr)
+begin
+ash_data<=bsh_data>>1;
+end
+mem[addr]<=ash_data;
+end
+
+endmodule

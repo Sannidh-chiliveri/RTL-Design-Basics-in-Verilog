@@ -1,0 +1,22 @@
+module zerodetector(d,y);
+input [7:0]d;    
+output reg y;
+reg w0,w1,w2,w3;
+reg r0,r1;
+integer i;
+always@(*)
+begin
+for(i=4'b0;i<4'd8;i=i+1)
+begin
+d[i]<=!d[i];
+end
+w0=d[0]&d[1];
+w1=d[2]&d[3];
+w2=d[4]&d[5];
+w2=d[6]&d[7];
+r0=w0&w1;
+r1=w2&w3;
+y=r0&r1;
+end
+
+endmodule

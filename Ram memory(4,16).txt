@@ -1,0 +1,15 @@
+module ram_4_16(clk,rst,wr,rd,d_in,addr,d_out);
+input clk,rst,wr,rd;
+inout [3:0]d_in,addr;
+output reg [3:0]d_out;
+reg [3:0] mem [15:0];
+always@(posedge clk or posedge rst)
+begin
+if(rst)
+d_out=4'd0;
+else if (wr)
+mem[addr]=d_in;
+else if (rd)
+d_out=mem[addr];
+end
+endmodule

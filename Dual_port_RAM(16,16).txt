@@ -1,0 +1,33 @@
+module dual_ram(clk,rst,port,wr1,wr2,addr1,addr2,din1,din2,dout1,dout2);
+input clk,rst,,port,wr1,wr2;//port=0 for 1 st port and port=1 for 2nd port
+input [3:0]addr1,addr2;
+input [15:0]din1,din2;
+output reg [15:0]dout1,dout2;
+reg [15:0] ram [15:0];
+always@(posedge clk or posedge rst)
+begin
+if(rst)
+ begin
+ dout1<=16'b0;
+ dout2<=16'b0;
+ end
+else
+ begin
+ if(!port)
+  begin
+  if(wr1)
+   ram[addr1]<=din1;
+  else
+   dout1<=ram[addr1];
+  end 
+ else 
+  begin
+  if(wr2)
+   ram[addr2]<=din2;
+  else
+   dout2<=ram[addr2];
+  end 
+  end
+ end 
+end
+endmodule

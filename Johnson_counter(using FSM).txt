@@ -1,0 +1,25 @@
+module bit_counter_fsm(clk,rst,count);
+input clk,rst;
+output reg[3:0]count;
+parameter a=4'b0000,b=4'b0001,c=4'b0011,d=4'b0111,e=4'b1111,f=4'b1110,g=4'b1100,h=4'b1000;
+reg [3:0]st,nx_st;
+always@(posedge clk or posedge rst)
+begin
+begin 
+if(rst)
+ st=a;
+else
+ st=nx_st;  
+end
+
+begin
+case(st)
+a:nx_st=b;
+b:nx_st=c;
+c:nx_st=d;
+d:nx_st=e;
+e:nx_st=f;
+f:nx_st=g;
+g:nx_st=h;
+h:nx_st=a;
+endcase

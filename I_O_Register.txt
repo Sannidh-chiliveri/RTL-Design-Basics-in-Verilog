@@ -1,0 +1,13 @@
+module io_reg(clk,rst,rd,wr,din,dout);
+input clk,rst,rd,wr;
+input [15:0]din;
+output reg [15:0]dout;
+reg [15:0]io_dev;
+always@(posedge clk or posedge rst)
+begin
+if(wr)
+io_dev<=din;
+if(rd)
+dout<=io_dev;
+end
+endmodule

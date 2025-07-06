@@ -1,0 +1,18 @@
+module repple_carry_adder(a,b,cin,cout,sum);
+input [3:0]a,b;
+input cin;
+output reg [3:0]sum;
+output reg cout;
+reg [3:0]w;
+integer i;
+always@(*)
+begin
+w[0]=cin;
+for(i=0;i<4;i=i+1)
+begin
+sum[i]=a[i]^b[i]^w[i];
+w[i+1]=(w[i]&(a[i]^b[i]))|(a[i]&b[i]);
+end
+cout=w[4];
+end
+endmodule

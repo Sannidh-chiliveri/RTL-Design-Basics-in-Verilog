@@ -1,0 +1,28 @@
+
+module lfsr(clk,rst,set,ss,qq);
+input clk,rst,set;
+input [2:0]ss;
+output [2:0]qq;
+wire dd;
+
+dff d1(clk,rst,set,ss[2],dd,qq[2]);
+dff d2(clk,rst,set,ss[1],qq[2],qq[1]);
+dff d3(clk,rst,set,ss[0],qq[1],qq[0]);
+xor d0(dd,qq[1],qq[0]);
+
+endmodule
+
+module dff(clk,rst,set,sb,d,q);
+input clk,rst,set,sb,d;
+output reg q;
+always@(posedge clk or posedge rst)
+begin
+if(rst)
+ q<=1'b0;
+else if(set)
+ q<=sb;
+else
+ q<=d;  
+ 
+end
+endmodule

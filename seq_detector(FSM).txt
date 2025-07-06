@@ -1,0 +1,21 @@
+//for seqence detector ;1011
+module seq_det(clk,rst,in,out);
+input clk,rst,in;
+output reg out;
+parameter a=2'b00,b=2'b01,c=2'b10,d=2'b11;
+reg [1:0]st,nx_st;
+always@(posedge clk or posedge rst)
+begin
+if(rst)
+st=a;
+else
+begin
+case(st)
+a:begin nx_st=in?b:a; out=1'b0; end
+b:begin nx_st=in?c:b; out=1'b0; end
+c:begin nx_st=in?d:a; out=1'b0; end
+d:begin nx_st=in?b:c; out=1'b1; end
+endcase
+end
+end
+endmodule

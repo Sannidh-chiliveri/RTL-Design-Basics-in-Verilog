@@ -1,0 +1,34 @@
+module fifo_r_w(clk,rst,en_r,en_w,d_in,d_out,empty,full);
+input clk,rst,en_r,en_w;
+input [7:0]d_in;
+output reg empty,full;
+output reg [7:0]d_out;
+reg [7:0] queue [15:0];
+reg [3:0]r_ptr,w_ptr;
+always@(posedge clk or posedge rst)
+begin
+if(rst)
+begin
+ r_ptr=4'b0000;
+ w_ptr=4'b0000;
+ empty=1'b1;
+ full=1'b0;
+end
+else
+begin
+ if(en_w && !full)
+ begin
+  queue[w_ptr]=d_in;
+  w_ptr=w_ptr+1;
+ end
+ if(en_r && !empty)
+ begin
+  d_out=queue[r_ptr];
+  r_ptr=r_ptr+1;
+ end
+ full=(w_ptr==4'b1111);
+ empty=(w_ptr==r_ptr);
+end
+
+end
+endmodule

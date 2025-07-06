@@ -1,0 +1,20 @@
+module carry_skip_adder(a,b,cin,cout,sum);
+input [3:0]a,b;
+input cin;
+output reg [3:0]sum;
+output reg cout;
+reg [3:0]w;
+reg s;
+integer i;
+always@(*)
+begin
+w[0]=cin;
+for(i=0;i<4;i=i+1)
+begin
+sum[i]=a[i]^b[i]^w[i];
+w[i+1]=(w[i]&(a[i]^b[i]))|(a[i]&b[i]);
+end
+s=sum[0]&sum[1]&sum[2]&sum[3];
+cout=s?cin:w[4];
+end
+endmodule

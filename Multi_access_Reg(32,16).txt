@@ -1,0 +1,36 @@
+module reg_32(clk,rst,w1,w2,w3,w4,addr1,addr2,addr3,addr4,din1,din2,din3,din4,dout1,dout2,dout3,dout4);
+input clk,rst,w1,w2,w3,w4;
+input [3:0]addr1,addr2,addr3,addr4;
+input [31:0]din1,din2,din3,din4;
+output reg [31:0]dout1,dout2,dout3,dout4;
+reg [31:0] reg1 [15:0];
+always@(posedge clk or posedge rst)
+begin
+if(rst)
+begin
+dout1=32'd0;
+dout2=32'd0;
+dout3=32'd0;
+dout4=32'd0;
+end
+else
+begin
+ if(w1)
+ reg1[addr1]=din1;
+ else
+ dout1=reg1[addr1];
+ if(w2)
+ reg1[addr2]=din2;
+ else
+ dout2=reg1[addr2];
+ if(w3)
+ reg1[addr3]=din3;
+ else
+ dout3=reg1[addr3];
+ if(w4)
+ reg1[addr4]=din4;
+ else
+ dout4=reg1[addr4];
+end
+end
+endmodule

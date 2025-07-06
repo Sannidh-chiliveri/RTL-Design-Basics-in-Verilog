@@ -1,0 +1,14 @@
+module sram(clk,ew,er,addr,d_out,d_in);
+input clk,ew,er;
+input [5:0]addr;
+input [7:0]d_in;
+output reg [7:0]d_out;
+reg [7:0] mem [63:0];
+always@(posedge clk)
+begin
+if(ew)
+mem[addr]=d_in;
+if(er)
+d_out=mem[addr];
+end
+endmodule

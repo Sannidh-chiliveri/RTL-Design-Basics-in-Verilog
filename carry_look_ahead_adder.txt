@@ -1,0 +1,22 @@
+
+module carry_look_ahead(a,b,cin,cout,sum);
+input [3:0]a,b;
+input cin;
+output reg [3:0]sum;
+output reg cout;
+reg [3:0]w,p,g;
+integer i;
+always@(*)
+begin
+w[0]=cin;
+for(i=0;i<4;i=i+1)
+begin
+p[i]=a[i]^b[i];
+g[i]=a[i]&b[i];
+
+sum[i]=p[i]^w[i];
+w[i+1]=(w[i]&p[i])|(g[i]);
+end
+cout=w[4];
+end   
+endmodule

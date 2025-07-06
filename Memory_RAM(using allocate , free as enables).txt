@@ -1,0 +1,17 @@
+module mem_alloc(clk,alloc,free,din,addr,dout,en_out);
+input clk,alloc,free;
+input [7:0]din,addr;
+output reg [7:0]dout;
+output reg en_out;
+reg [7:0] mem [255:0];
+always@(posedge clk)
+begin
+if(alloc)
+ mem[addr]=din;
+ en_out=1'b1;
+if(free)
+ dout=mem[addr];
+ mem[addr]=8'd0;
+ en_out=1'b0;
+end
+endmodule

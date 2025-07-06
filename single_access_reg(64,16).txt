@@ -1,0 +1,16 @@
+module reg_r_w(clk,rst,rd,wr,addr1,din,dout);
+input clk,rst,rd,wr;
+input [63:0]din;
+input [3:0]addr1;
+output reg[63:0]dout;
+reg [63:0] reg1 [15:0];
+always@(posedge clk or posedge rst)
+begin
+if(rst)
+dout=64'd0;
+else if (wr)
+reg1[addr1]=din;
+else if (rd)
+dout=reg1[addr1];
+end
+endmodule

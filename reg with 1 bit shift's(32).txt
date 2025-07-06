@@ -1,0 +1,21 @@
+module shift_reg_32bit(clk,rst,ld,shr,shl,din,dout);
+input clk,rst,ld,shr,shl;
+input [31:0]din;
+output reg [31:0]dout;
+reg [31:0]reg1;
+always@(posedge clk or posedge rst)
+begin
+if(rst)
+ reg1=32'd0;
+else
+begin
+ if(ld)
+  reg1<=din;
+ else if(shr)
+  reg1<=reg1>>1'b1;
+ else if(shl)
+  reg1<=reg1<<1'b1;    
+end 
+dout<=reg1;
+end
+endmodule
